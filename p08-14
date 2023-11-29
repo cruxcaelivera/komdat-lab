@@ -1,0 +1,778 @@
+UASP
+-	Routing, diberikan topologi dan alamat IP
+-	Boleh menggunakan laptop dan melihat github
+
+Operasi Dasar
+Koneksi Point-to-Point
+•	Dua PC dengan IP Configuration statis dihubungkan dengan kabel LAN Copper cross-over
+Switch dan Hub
+•	Tiga PC dengan IP statis dihubungkan dengan switch
+o	Cek tabel ARP pada tiap PC dan tabel MAC pada switch dengan tombol "Inspect"
+•	Kemudian coba juga dengan memakai hub
+o	hub: cara kerjanya broadcast
+
+Komunikasi Data dan Jaringan Komputer Praktikum Minggu ke-8
+1. Login cisco skillsforall
+2. Buka cisco packet tracer 8.2
+3. Hubungkan cisco packet tracker dengan akun cisco skillsforall
+4. Untuk menambah komputer pencet ikon menu end devices lalu pilih PC
+5. Untuk mematikan komputer, pencet ikon PC lalu pencet tombol merah
+6. Untuk menghubungkan komputer 1 dan komputer 2 pencet ikon menu connections lalu pencet petir
+•	Jaringan 192.168.0.0/24:
+o	Alamat jaringan: 192.168.0.0
+o	Alamat untuk host: 192.168.0.[1-254] --> maksimal 254 host dalam jaringan ini	
+o	Setting IP statis untuk tiap PC melalui command prompt, misal: ipconfig 192.168.0.1 255.255.255.0
+o	Alamat broadcast: 192.168.0.255
+o	Prefiks jaringan: 24 --> Subnet mask: 255.255.255.0
+•	Alamat jaringan: digunakan untuk routing
+•	Alamat broadcast: digunakan untuk mengetahui siapa saja host lain yang berada dalam satu jaringan
+7. Untuk mengatur IP Computer, pencet ikon komputer, pilih menu desktop, pencet IP Config, lalu ketik 192.168.0.x (x untuk komputer pertama dimulai dari 1, 0 untuk jaringan) subnet mask akan diatur secara otomatis
+Broadcast
+•	Coba ping broadcast untuk jaringan 192.168.0.0/24
+o	ping 192.168.0.255
+o	ping 255.255.255.255 (jika alamat jaringan tidak diketahui)
+8. Ping komputer 1 ke komputer 2 dengan memencet ikon komputer 1 lalu buka menu desktop, pilih command prompt, lalu ketik ping 192.168.0.2 (Komputer 2)
+Switch dan Hub
+9. Untuk menghubungkan 3 komputer sekaligus, gunakan PT-Switch, tambah komputer ketiga terlebih dahulu, lalu pencet menu network devices, pilih submenu switches, lalu pilih PT-switch
+10. Lakukan hal yang sama, hubungkan ketiga komputer tersebut ke PT-Switch, untuk menghapus komputer yang sudah terhubung, gunakan Delete (Del)
+11. Tunggu hingga seluruh komputer terhubung
+12. Lakukan hal yang sama mengubah ip komputer ke empat dengan digit terakhir 3
+13. Lakukan hal yang sama melakukan ping komputer 1 dan 2 dari komputer 3, menggunakan ping 192.168.0.255 (Ping ke alamat dalam 1 jaringan)
+14. Realtime adalah waktu dari awal cisco packet tracer berjalan, lalu simulation untuk ujicoba. 
+15. Uji coba, pencet simulation di ujung kanan bawah, add simple PDU ke komputer sumber dan tujuan, perhatikan komputer
+15. Untuk menjalankan uci coba, pencet tombol play pada play control
+15. Untuk mempercepat cukup geser play control ke kanan
+•	Jalankan pada mode simulasi, amati jalannya paket ICMP
+15. Jika hanya ingin melihat ICMP, pencet edit filter pilih ICMP, lalu pencet show all/none
+16. Kembali ke realtime
+17. Jika ingin delete, pencet delete di bawah scenario, di sampingnya bisa dilihat last status successful
+
+ 
+Komunikasi dan Jaringan Komputer Minggu ke-9
+Aplikasi Server dan Wireless
+•	Menghubungkan 3 PC dengan menggunakan switch
+o	alamat jaringan LAN yang akan dipakai: 10.1.1.0/24
+DHCP
+•	DHCP digunakan untuk memberikan konfigurasi alamat IP secara dinamis kepada klien
+1. Hubungkan PT Switch ke PT Server. Buka menu End Device pilih Server dengan Connections petir
+2. Konfigurasi server agar ketiga komputer otomatis, pencet server, desktop, IP config,  pilih IP Configuration: Static
+IPv4 Address	: 10.1.1.2 
+Subnet mask	: 255.255.255.0
+3. Ke service, pilih DHCP, ikutin aturan servis DHCP pada GitHub, setelah sudah semua, pencet save.
+Default gateway: 10.1.1.1
+DNS server     : 10.1.1.2
+Start IP addres: 10.1.1.101
+Subnet mask    : 255.255.255.0
+Max num of user: 150
+4. Tekan tombol on pada service
+5. Pencet setiap PC, desktop, IP config, pilih IP Configuration DHCP
+6. Uji dengan simple PDU dari 1 komputer ke komputer lain, lihat apakah statusnya successful.
+Multiple Switch
+Tambahkan satu switch baru dan beberapa PC
+7. Matikan Switch0, Tambah port pada Switch0 dengan PT-Switch CFE pada kotak hitam kosong.
+8. Hubungkan switch kedua dengan switch ke1 dengan menu Connections >> Copper Cross-Over, Hubungkan switch ke switch dengan pilih menu connections >> kabel fiber (fastethernet kuning)
+*Menghubungkan switch ke switch dengan menggunakan copper cross-over
+Pencet setiap PC pada switch baru, desktop, ip config, pili hip configuration DHCP
+•	jangan memasang switch membentuk cycle, karena akan membuat jaringan looping
+•	kecuali jika switch mendukung STP, link yang membentuk loop akan diputus otomatis
+*Menghubungkan switch dengan switch menggunakan port PT-Switch CFE
+*Jika komputer switch dibuat dengan copy paste, setting ulang IP config computer ke static kembali ke DHCP
+9. Uji simple PDU dari komputer switch kedua ke komputer switch pertama
+Wireless AP
+10. Pilih menu Network Device lalu sub menu Wireless Device, Tambah access point (AP-PT)
+11. Lalu pilih menu end device, tambah laptop dan smartphone
+12. Hubungkan access point dengan server PT, dengan menu Connections, tapi sebelum itu, tambah port pada server dengan PT--HOST-NM-1CFE, tunggu hingga terhubung.
+13. Configurasi access point, pencet access point PT >> config >> port 1
+14. Atur SSID dengan nama bebas >> Pilih autentikasi  WPA2-PSK atur password pada PSK Pass Phrase
+15. Buka laptop, matikan laptop terlebih dahulu, ganti kotak network interface ethernet dengan modul  PT-LAPTOP-NM-1W
+Buka config, wireless0, atur SSID, wpa2 dan psk pass yang sama dengan pada Access Point
+16. Lakukan yang sama pada smartphone
+ 
+Komunikasi dan Jaringan Komputer Minggu ke-10
+Alangkah baiknya tidak menggunakan template agar tidak terjadi sesuatu yang tidak diinginkan!
+1. Buat seperti pada foto. Menghubungkan dua jaringan 10.1.1.0 dan 10.1.2.0 dengan sebuah router.
+2. Setiap jaringan terdapat beberapa PC yang terhubung ke switch.
+3. Siapkan satu laptop, hubungkan ke router dengan membuka menu connections > pilih kabel console (Warna biru). Pilih RS232 pada sumber dan console pada tujuan.
+4. Buka router, ikuti perintah di github, jangan lupa hapus enable secret sebelum dicopy paste!
+enable
+configure terminal
+  hostname R0
+
+  interface FastEthernet 0/0
+    ip address 10.1.1.1 255.255.255.0
+    no shutdown
+  interface FastEthernet 1/0
+    ip address 10.1.2.1 255.255.255.0
+    no shutdown
+    exit
+•	Setelah itu, atur layanan DHCP pada router dengan membuat pool untuk tiap jaringan
+o	atur range alamat awal--akhir yang dikecualikan (tidak masuk) oleh DHCP
+  ip dhcp pool NET1
+    network 10.1.1.0 255.255.255.0
+    default-router 10.1.1.1
+    exit
+  ip dhcp excluded-address 10.1.1.1 10.1.1.10
+
+  ip dhcp pool NET2
+    network 10.1.2.0 255.255.255.0
+    default-router 10.1.2.1
+    exit
+  ip dhcp excluded-address 10.1.2.1 10.1.2.10
+
+  exit
+show running-config
+copy running-config startup-config
+
+Ketika copy running-config startup-config tekan enter saja ketika ditanya destination filename
+Tugas!
+Atur konfiguras router untuk menghubungkan tiga jaringan yang berbeda, yaitu jaringan untuk STAFF, STUDENT, dan LAB. Berikan alamat IP privat dengan subnet masing-masing 172.18.15.0/24, 172.18.16.0/24, dan 172.18.14.0/24. Tambahkan interface Ethernet di router jika diperlukan.
+1. Buat seperti yang di awal, bedanya ada 3 switch yang terhubung ke 1 router 
+2. Karena ada 3 switch, sedangkan router hanya memiliki 2 port, maka matikan router terlebih dahulu, tambahkan 1 port PT-ROUTER-NM-1CFE, lalu nyalakan. Hubungkan dengan listrik dari menu connections.
+3. Buka router, ikuti perintah di github jangan lupa hapus enable secret sebelum copy paste, bedanya adalah mengikuti jaringan yang diberikan pada tugas, yaitu 172.18.15.0, 172.18.16.0, 172.18.14.0 
+enable
+configure terminal
+  hostname R0
+
+  interface FastEthernet 0/0
+    ip address 172.18.15.1 255.255.255.0
+    no shutdown
+  interface FastEthernet 1/0
+    ip address 172.18.16.1 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 6/0
+    ip address 172.18.14.1 255.255.255.0
+    no shutdown
+    exit
+•	Setelah itu, atur layanan DHCP pada router dengan membuat pool untuk tiap jaringan
+o	atur range alamat awal--akhir yang dikecualikan (tidak masuk) oleh DHCP
+  ip dhcp pool NET1
+    network 172.18.15.0 255.255.255.0
+    default-router 172.18.15.1
+    exit
+  ip dhcp excluded-address 172.18.15.1 172.18.15.10
+
+  ip dhcp pool NET2
+    network 172.18.16.0 255.255.255.0
+    default-router 172.18.16.1
+    exit
+  ip dhcp excluded-address 172.18.16.1 172.18.16.10
+
+  ip dhcp pool NET3
+    network 172.18.14.0 255.255.255.0
+    default-router 172.18.14.1
+    exit
+  ip dhcp excluded-address 172.18.14.1 172.18.14.10
+
+  exit
+show running-config
+copy running-config startup-config
+
+Kenapa interface FastEthernet 6/0? Karena listrik yang dihubungkan di port 6/0. Untuk melihat nomor port, buka option, preferences, nyalakan “Always Show Port Labels in Logical Workspace”
+Ubah ip address  10.1.1.1, 10.1.2.1, dst menjadi sesuai yang diminta soal, yaitu 172.18.15.1, 172.18.16.1, 172.18.14.1 (Ganti ekornya dengan 1)
+Sesuaikan antara ip address dan FastEthernetnya!
+Karena ada 3 jaringan, maka ip dhcp pool net ada 3 juga 
+Ubah network sesuai yang diminta soal!, yaitu 172.18.15.0, 172.18.16.0, 172.18.14.0 
+Ubah juga default router dan ip dhcp excluded-address sesuai ip address, tapi angka 1 dan 10 di belakang jangan di ubah! Yaitu 
+Jangan lupa set DHCP semua PC sebelum uji coba simple PDU!
+Sebelum uji coba simple PDU, uji coba simple PDU antar komputer dalam satu jaringan sebelum ke berbeda jaringan!
+ 
+Komunikasi dan Jaringan Komputer Minggu ke-11
+1. Buat seperti pada foto. Menghubungkan dua jaringan 10.1.1.0 dan 10.1.2.0 pada router pertama dan jaringan 10.1.3.0 pada router kedua.
+2. Setiap jaringan terdapat beberapa PC yang terhubung ke switch.
+3. Siapkan satu laptop, hubungkan ke router dengan membuka menu connections > pilih kabel console (Warna biru). Pilih RS232 pada sumber dan console pada tujuan.
+4. Buka router, ikuti perintah di github, jangan lupa hapus enable secret sebelum dicopy paste!
+Konfigurasi router pertama (Router0)
+enable
+configure terminal
+  hostname R0
+
+  interface FastEthernet 0/0
+    ip address 10.1.1.1 255.255.255.0
+    no shutdown
+  interface FastEthernet 1/0
+    ip address 10.1.2.1 255.255.255.0
+    no shutdown
+    exit
+
+  ip dhcp pool NET1
+    network 10.1.1.0 255.255.255.0
+    default-router 10.1.1.1
+    exit
+  ip dhcp excluded-address 10.1.1.1 10.1.1.10
+
+  ip dhcp pool NET2
+    network 10.1.2.0 255.255.255.0
+    default-router 10.1.2.1
+    exit
+  ip dhcp excluded-address 10.1.2.1 10.1.2.10
+
+  exit
+show running-config
+copy running-config startup-config
+
+Konfigurasi router kedua (Router1)
+enable
+configure terminal
+  hostname R1
+
+  interface FastEthernet 0/0
+    ip address 10.1.3.1 255.255.255.0
+    no shutdown
+    exit
+
+  ip dhcp pool NET3
+    network 10.1.3.0 255.255.255.0
+    default-router 10.1.3.1
+    exit
+  ip dhcp excluded-address 10.1.3.1 10.1.3.10
+
+  exit
+show running-config
+copy running-config startup-config
+
+Interface FastEthernet 0/0 adalah semua PC yang terhubung ke switch
+Ketika copy running-config startup-config tekan enter saja ketika ditanya destination filename
+*Perhatikan, meskipun berbeda router, tetap untuk jaringan yang berbeda harus ip dhcp pool NET yang berbeda juga.
+5. Hubungkan router pertama (Router0) dan router kedua (Router1) dengan kabel Fiber Optic (Menu connections >> Kabel Fiber). Pilih FastEthernet sesuai keinginan (Dalam hal ini memilih port 4/0). Pastikan FastEthernet sumber dan tujuan sama!.
+Router pertama dan router kedua akan membuat jaringan baru, yaitu 10.1.0.1/2
+Kita akan membuat router mengenali satu sama lain!
+Konfigurasi router pertama (Router0)
+! R0 (Copy Paste dari enable)
+enable
+configure terminal
+  hostname R0
+  interface FastEthernet4/0
+    ip address 10.1.0.1 255.255.255.0
+    no shutdown
+    exit
+
+Konfigurasi router kedua (Router1)
+! R1 (Copy Paste dari enable)
+enable
+configure terminal
+  hostname R1
+
+  interface FastEthernet4/0
+    ip address 10.1.0.2 255.255.255.0
+    no shutdown
+    exit
+
+*interface FastEthernet disesuaikan dengan port yang dipilih.
+*Angka yang berbeda pada ekor itu berarti misal .1 = Router 1, .2 = Router 2
+Selanjutnya, konfigurasi routing statis/routing statik di router pertama dan router kedua!
+Konfigurasi routing statis/routing statik di router pertama (Router0)
+Tujuan kita adalah ke jaringan ke-tiga, yaitu 10.1.3.0/24, yang terhubung ke router kedua 10.1.0.2  (R1) (10.1.0.2 adalah ip yang dikonfigurasi untuk FastEthernet4/0)
+! R0 (Copy paste dari enable)
+enable
+configure terminal
+
+  ip route 10.1.3.0 255.255.255.0 10.1.0.2
+  exit
+show ip route
+copy running-config startup-config
+
+*ip route  ip_jaringan_tujuan 255.255.255.0 ip__router_tujuan_yang_terhubung_ke_FastEthernet4/0
+
+Konfigurasi routing statis/routing statik di router kedua (Router1)
+Tujuan kita adalah ke jaringan satu dan dua, yaitu 10.1.1.0/24 dan 10.1.2.0/24, yang terhubung ke router pertama 10.1.0.1  (R1) (10.1.0.1 adalah ip yang dikonfigurasi untuk FastEthernet4/0)
+! R1 (Copy paste dari enable)
+enable
+configure terminal
+  ip route 10.1.1.0 255.255.255.0 10.1.0.1
+  ip route 10.1.2.0 255.255.255.0 10.1.0.1
+  exit
+show ip route
+copy running-config startup-config
+
+6. Set konfigurasi IP semua PC yang baru dengan DHCP
+7. Uji coba dengan simple PDU, seperti biasa, uji coba antar komputer dalam satu jaringan baru ke komputer antar jaringan.
+
+Tugas
+Tambahkan router baru R2 yang terhubung langsung dengan R1. Router ini memiliki dua jaringan baru, yaitu 10.1.4.0/24 dan 10.1.5.0/24. Tunjukkan bahwa kelima jaringan tersebut sudah terhubung dengan mengirimkan simple PDU antar-PC dari jaringan:
+•	10.1.1.0/24 ke 10.1.3.0/24 (Jaringan pertama pada router pertama ke jaringan ke tiga pada router kedua)
+•	10.1.3.0/24 ke 10.1.4.0/24 (Jaringan ketiga pada router kedua ke jaringan ke empat pada router ketiga)
+•	10.1.2.0/24 ke 10.1.5.0/24 (Jaringan kedua pada router pertama ke jaringan ke lima pada router ketiga)
+
+1. Lakukan langkah yang sama konfigurasi router ketiga dari awal untuk jaringan keempat dan kelima seperti router pertama (Karena ada dua jaringan yang terhubung ke satu switch)
+enable
+configure terminal
+  hostname R0
+
+  interface FastEthernet 0/0
+    ip address 10.1.4.1 255.255.255.0
+    no shutdown
+  interface FastEthernet 1/0
+    ip address 10.1.5.1 255.255.255.0
+    no shutdown
+    exit
+
+  ip dhcp pool NET4
+    network 10.1.4.0 255.255.255.0
+    default-router 10.1.4.1
+    exit
+  ip dhcp excluded-address 10.1.4.1 10.1.4.10
+
+  ip dhcp pool NET5
+    network 10.1.5.0 255.255.255.0
+    default-router 10.1.5.1
+    exit
+  ip dhcp excluded-address 10.1.5.1 10.1.5.10
+
+  exit
+show running-config
+copy running-config startup-config
+
+2. Tambah router ketiga (R2) yang terhubung ke router kedua (R1) menggunakan menu connections >> kabel fiber optik (FO). Pastikan FastEthernet sumber dan tujuan sama. Dalam hal ini FastEthernet 5/0 (Karena router kedua sisa port 5/0)
+Router kedua dan ketiga kedua akan membuat jaringan baru, yaitu 10.2.0.2/3 
+3. Kita akan membuat router mengenali satu sama lain!
+Konfigurasi router kedua (Router1)
+! R1 (Copy Paste dari enable)
+enable
+configure terminal
+  hostname R1
+  interface FastEthernet 5/0
+    ip address 10.2.0.1 255.255.255.0
+    no shutdown
+    exit
+
+Konfigurasi router ketiga (Router2)
+! R2 (Copy Paste dari enable)
+enable
+configure terminal
+  hostname R2
+
+  interface FastEthernet5/0
+    ip address 10.2.0.2 255.255.255.0
+    no shutdown
+    exit
+
+*interface FastEthernet disesuaikan dengan port yang dipilih.
+*Angka yang berbeda pada ekor itu berarti misal .1 = Router 2, .2 = Router 3
+(Jadi ekor tetap dimulai dari 1 meskipun jaringan antar router yang berbeda)
+*Setelah angka 10, harus ganti 2, 3, dst. Tujuannya agar tidak overlap ip address dengan jaringan yang dibuat antara router pertama – router kedua. 
+Jadi 10.jaringan pertama/kedua/dst.0.1/2/3/dst
+
+4. Selanjutnya, konfigurasi routing statis/routing statik di router kedua dan router ketiga
+Konfigurasi routing statis/routing statik di router kedua (Router1)
+Tujuan kita adalah ke jaringan ke-empat dan ke-lima, yaitu 10.1.4.0/24 dan 10.1.5.0/24, yang terhubung ke router ketiga 10.2.0.2  (R2) (10.1.0.3 adalah ip yang dikonfigurasi untuk FastEthernet5/0)
+! R1 (Copy paste dari enable)
+enable
+configure terminal
+
+  ip route 10.1.4.0 255.255.255.0 10.2.0.2
+  ip route 10.1.5.0 255.255.255.0 10.2.0.2
+
+  exit
+show ip route
+copy running-config startup-config
+
+*ip route  ip_jaringan_tujuan 255.255.255.0 ip__router_tujuan_yang_terhubung_ke_FastEthernet5/0
+
+*ip router tujuan yang terhubung ke FastEthernet 10.2.0.1
+
+Konfigurasi routing statis/routing statik di router ketiga (Router2)
+Tujuan kita adalah ke jaringan ketiga, yaitu 10.1.3.0/24, yang terhubung ke jaringan dua router kedua 10.2.0.1  (R2) (10.1.0.2 adalah ip yang dikonfigurasi untuk FastEthernet5/0)
+! R2 (Copy paste dari enable)
+enable
+configure terminal
+  ip route 10.1.1.0 255.255.255.0 10.2.0.1
+  ip route 10.1.2.0 255.255.255.0 10.2.0.1
+  ip route 10.1.3.0 255.255.255.0 10.2.0.1
+  exit
+show ip route
+copy running-config startup-config
+
+Kenapa ada jaringan pertama dan jaringan kedua? Karena jaringan pertama dan kedua perlu dikenalkan ke router ketiga lewat jaringan dua router kedua (10.2.0.1) (Router kedua di sini sebagai perantara)
+Maka dari itu, kita juga perlu mengenalkan jaringan keempat dan kelima ke router pertama lewat jaringan pertama router kedua (10.1.0.2) (Router kedua di sini sebagai perantara dari jaringan pertama)
+! R0 (Copy paste dari enable)
+enable
+configure terminal
+  ip route 10.1.4.0 255.255.255.0 10.1.0.2
+  ip route 10.1.5.0 255.255.255.0 10.1.0.2
+  exit
+show ip route
+copy running-config startup-config
+
+5. Set konfigurasi IP semua PC yang baru dengan DHCP
+6. Uji coba dengan simple PDU, seperti biasa, uji coba antar komputer dalam satu jaringan baru ke komputer antar jaringan.
+
+
+
+ 
+Komunikasi dan Jaringan Komputer Minggu ke-12
+Routing Dinamis: RIPv2
+Routing Statis vs Dinamis
+Routing Statis: Konfigurasi manual tiap router
+Routing Dinamis: routing information protocol (RIP), open shortest path first (OSPF), dan border gateway protocol (BGP).
+
+Routing Information Protocol (RIP)
+Routing Dinamis dengan RIPv2
+•	RIPv2 menambahkan dukungan classless inter-domain routing (CIDR)
+
+1. Buat seperti pada foto. Siapkan tiga router yang masing-masing terhubung ke suatu jaringan. Ubah nama router0 menjadi router1 untuk router pertama dan seterusnya (Agar tidak membingungkan).
+2. Setiap jaringan terdapat beberapa PC yang terhubung ke switch.
+3. Hubungkan setiap router dengan menu Connections > Kabel Fiber. Matikan router ketiga, lalu Tambahkan PT-ROUTER-FFE, nyalakan kembali. Hubungkan ke router kesatu dan kedua. Pastikan FastEthernet yang digunakan antara sumber dan tujuan sama, dan antar FastEthernet yang digunakan jaringan berbeda/tidak bertabrakan satu-sama lain.
+4. Buka router, ikuti perintah di github, jangan lupa hapus enable secret sebelum dicopy paste!
+Konfigurasi router R1
+enable
+configure terminal
+  hostname R1
+
+  interface FastEthernet 0/0
+    ip address 10.1.1.1 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET1
+    network 10.1.1.0 255.255.255.0
+    default-router 10.1.1.1
+    exit
+  ip dhcp excluded-address 10.1.1.1 10.1.1.100
+Set DHCP setiap PC
+  interface FastEthernet 4/0
+    ip address 10.1.12.1 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 5/0
+    ip address 10.1.13.1 255.255.255.0
+    no shutdown
+    exit
+*Interface FastEthernet menyesuaikan yang terhubung ke router kedua dan ketiga.
+Konfigurasi routing RIP, daftarkan semua jaringan yang terhubung langsung dengan R1 dalam notasi classful, lalu matikan fitur auto-summary agar mendukung alamat classless.
+*ip address 10.1.12.1, dimana 12 adalah hubungan antara router pertama dan router kedua
+*ip address 10.1.13.1 dimana 13 adalah hubungan antara router pertama dan router ketiga
+*Sesuaikan antara ip address dan FastEthernet yang digunakan
+*Jangan lupa ubah dhcp pool net, network, dan default router menyesuaikan dengan routernya.
+  router rip
+    version 2
+    network 10.0.0.0
+    no auto-summary
+    passive-interface FastEthernet 0/0
+    exit
+  exit
+copy running-config startup-config
+
+Konfigurasi router R2
+enable
+configure terminal
+  hostname R2
+
+  interface FastEthernet 0/0
+    ip address 10.1.2.1 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 5/0
+    ip address 10.1.12.2 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 4/0
+    ip address 10.1.23.2 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET2
+    network 10.1.2.0 255.255.255.0
+    default-router 10.1.2.1
+    exit
+  ip dhcp excluded-address 10.1.2.1 10.1.2.100
+
+  router rip
+    version 2
+    network 10.0.0.0
+    no auto-summary
+    passive-interface FastEthernet 0/0
+    exit
+
+  exit
+copy running-config startup-config
+*Interface FastEthernet menyesuaikan yang terhubung ke router kesatu dan ketiga.
+Jangan lupa set ip DHCP tiap pc
+Konfigurasi router R3
+enable
+configure terminal
+  hostname R3
+
+  interface FastEthernet 0/0
+    ip address 10.1.3.1 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 4/0
+    ip address 10.1.13.3 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 5/0
+    ip address 10.1.23.3 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET3
+    network 10.1.3.0 255.255.255.0
+    default-router 10.1.3.1
+    exit
+  ip dhcp excluded-address 10.1.3.1 10.1.3.100
+
+  router rip
+    version 2
+    network 10.0.0.0
+    no auto-summary
+    passive-interface FastEthernet 0/0
+    exit
+
+  exit
+copy running-config startup-config
+Jangan lupa set ip DHCP tiap pc
+Pengujian
+•	Cek koneksi antara ketiga jaringan tersebut (mode realtime dan simulasi)
+•	Cek isi tabel routing tiap router dengan perintah show ip route atau dengan kaca pembesar Inspect (I) arahkan pada tiap router lalu pilih Routing Table
+•	Cek detail protokol dengan perintah show ip protocols
+Tugas
+Tambahkan satu router baru R4 yang tersambung ke R2, R3, dan jaringan baru NET4 10.1.4.0/24. Gunakan routing dinamis RIPv2 dan pastikan semua jaringan tersambung.
+Ambil screenshot dan kumpulkan ke LMS dengan ketentuan sebagai berikut:
+1. Tambahkan router4 beserta switch dan PC yang terhubung satu sama lain. 
+2. Hubungkan router4 ke router 2 dan router 3 dengan menu Connections > Kabel Fiber. Tambahkan PT-ROUTER-FFE untuk setiap router agar tidak terjadi tabrakan FastEthernet yang digunakan. Pastikan FastEthernet yang digunakan antara sumber dan tujuan sama.
+3. Buka router, ikuti perintah di github, jangan lupa hapus enable secret sebelum dicopy paste!
+Konfigurasi router R4
+enable
+configure terminal
+  hostname R4
+
+  interface FastEthernet 0/0
+    ip address 10.1.4.1 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 5/0
+    ip address 10.1.23.4 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 4/0
+    ip address 10.1.34.4 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET4
+    network 10.1.4.0 255.255.255.0
+    default-router 10.1.4.1
+    exit
+  ip dhcp excluded-address 10.1.4.1 10.1.4.100
+
+  router rip
+    version 2
+    network 10.0.0.0
+    no auto-summary
+    passive-interface FastEthernet 0/0
+    exit
+
+  exit
+copy running-config startup-config
+*Interface FastEthernet menyesuaikan yang terhubung ke router kedua dan ketiga
+*Jangan lupa set ip DHCP tiap pc.
+Setelah itu, buat router2 dan router3 mengenali router 4 dari router mereka sendiri!
+Konfigurasi router R2
+enable
+configure terminal
+  hostname R2
+  interface FastEthernet x/0
+    ip address 10.1.24.2 255.255.255.0
+    no shutdown
+    exit
+
+Konfigurasi router R3
+enable
+configure terminal
+  hostname R3
+  interface FastEthernet x/0
+    ip address 10.1.34.3 255.255.255.0
+    no shutdown
+    exit
+
+
+
+
+
+
+ 
+Komunikasi dan Jaringan Komputer Minggu ke-13
+Routing Dinamis: OSPF
+Dua cara bagaimana algoritme routing dinamis bekerja, yaitu distance-vector (contoh: RIP, EIGRP) dan link-state (contoh: OSPF, IS-IS).
+Contoh foto hanya satu area, area 0
+1. Buat seperti pada foto. Siapkan tiga router yang masing-masing terhubung ke suatu jaringan. Ubah nama router0 menjadi router1 untuk router pertama dan seterusnya (Agar tidak membingungkan).
+2. Setiap jaringan terdapat beberapa PC yang terhubung ke switch.
+3. Hubungkan setiap router dengan menu Connections > Kabel Fiber. Matikan router ketiga, lalu Tambahkan PT-ROUTER-FFE, nyalakan kembali. Hubungkan ke router kesatu dan kedua. Pastikan FastEthernet yang digunakan antara sumber dan tujuan sama, dan antar FastEthernet yang digunakan jaringan berbeda/tidak bertabrakan satu-sama lain.
+4. Buka router, ikuti perintah di github, jangan lupa hapus enable secret sebelum dicopy paste!
+Konfigurasi router R1
+enable
+configure terminal
+  hostname R1
+
+  interface FastEthernet 0/0
+    ip address 10.1.1.1 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET1
+    network 10.1.1.0 255.255.255.0
+    default-router 10.1.1.1
+    exit
+  ip dhcp excluded-address 10.1.1.1 10.1.1.100
+Set DHCP setiap PC
+  interface FastEthernet 4/0
+    ip address 10.1.12.1 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 5/0
+    ip address 10.1.13.1 255.255.255.0
+    no shutdown
+    exit
+*Interface FastEthernet menyesuaikan yang terhubung ke router kedua dan ketiga.
+Konfigurasi routing RIP, daftarkan semua jaringan yang terhubung langsung dengan R1 dalam notasi classful, lalu matikan fitur auto-summary agar mendukung alamat classless.
+*ip address 10.1.12.1, dimana 12 adalah hubungan antara router pertama dan router kedua
+*ip address 10.1.13.1 dimana 13 adalah hubungan antara router pertama dan router ketiga
+*Sesuaikan antara ip address dan FastEthernet yang digunakan
+*Jangan lupa ubah dhcp pool net, network, dan default router menyesuaikan dengan routernya.
+Konfigurasi routing OSPF, daftarkan semua jaringan yang terhubung langsung dengan R1, perhatikan notasi wildcard adalah kebalikan dari subnet mask.
+  router ospf 1
+    network 10.1.1.0  0.0.0.255  area 0
+    network 10.1.12.0 0.0.0.255  area 0
+    network 10.1.13.0 0.0.0.255  area 0
+    passive-interface FastEthernet 0/0
+    exit
+  exit
+copy running-config startup-config
+
+Konfigurasi router R2
+enable
+configure terminal
+  hostname R2
+
+  interface FastEthernet 0/0
+    ip address 10.1.2.1 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 5/0
+    ip address 10.1.12.2 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 4/0
+    ip address 10.1.23.2 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET2
+    network 10.1.2.0 255.255.255.0
+    default-router 10.1.2.1
+    exit
+  ip dhcp excluded-address 10.1.2.1 10.1.2.100
+
+  router ospf 1
+    network 10.1.2.0  0.0.0.255  area 0
+    network 10.1.12.0 0.0.0.255  area 0
+    network 10.1.23.0 0.0.0.255  area 0
+    passive-interface FastEthernet 0/0
+    exit
+
+  exit
+copy running-config startup-config
+*Interface FastEthernet menyesuaikan yang terhubung ke router kesatu dan ketiga.
+Jangan lupa set ip DHCP tiap pc
+Konfigurasi router R3
+enable
+configure terminal
+  hostname R3
+
+  interface FastEthernet 0/0
+    ip address 10.1.3.1 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 4/0
+    ip address 10.1.13.3 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 5/0
+    ip address 10.1.23.3 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET3
+    network 10.1.3.0 255.255.255.0
+    default-router 10.1.3.1
+    exit
+  ip dhcp excluded-address 10.1.3.1 10.1.3.100
+
+  router ospf 1
+    network 10.1.3.0  0.0.0.255  area 0
+    network 10.1.13.0 0.0.0.255  area 0
+    network 10.1.23.0 0.0.0.255  area 0
+    passive-interface FastEthernet 0/0
+    exit
+
+  exit
+copy running-config startup-config
+Jangan lupa set ip DHCP tiap pc
+Pengujian
+•	Cek koneksi antara ketiga jaringan tersebut (mode realtime dan simulasi)
+•	Cek isi tabel routing tiap router dengan perintah show ip route atau dengan kaca pembesar Inspect (I) arahkan pada tiap router lalu pilih Routing Table
+•	Cek detail protokol dengan perintah show ip protocols
+•	Cek tetangga router dengan perintah show ip ospf neighbor
+Tugas
+Tambahkan satu router baru R4 yang tersambung ke R2, R3, dan jaringan baru NET4 10.1.4.0/24. Gunakan routing dinamis RIPv2 dan pastikan semua jaringan tersambung.
+Ambil screenshot dan kumpulkan ke LMS dengan ketentuan sebagai berikut:
+1. Tambahkan router4 beserta switch dan PC yang terhubung satu sama lain. 
+2. Hubungkan router4 ke router 2 dan router 3 dengan menu Connections > Kabel Fiber. Tambahkan PT-ROUTER-FFE untuk setiap router agar tidak terjadi tabrakan FastEthernet yang digunakan. Pastikan FastEthernet yang digunakan antara sumber dan tujuan sama.
+3. Buka router, ikuti perintah di github, jangan lupa hapus enable secret sebelum dicopy paste!
+Konfigurasi router R4
+enable
+configure terminal
+  hostname R4
+
+  interface FastEthernet 0/0
+    ip address 10.1.4.1 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 5/0
+    ip address 10.1.23.4 255.255.255.0
+    no shutdown
+    exit
+  interface FastEthernet 4/0
+    ip address 10.1.34.4 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET4
+    network 10.1.4.0 255.255.255.0
+    default-router 10.1.4.1
+    exit
+  ip dhcp excluded-address 10.1.4.1 10.1.4.100
+
+  router ospf 1
+    network 10.1.4.0  0.0.0.255  area 0
+    network 10.1.24.0 0.0.0.255  area 0
+    network 10.1.34.0 0.0.0.255  area 0
+    passive-interface FastEthernet 0/0
+    exit
+
+  exit
+copy running-config startup-config
+*Interface FastEthernet menyesuaikan yang terhubung ke router kedua dan ketiga
+*Jangan lupa set ip DHCP tiap pc.
+Setelah itu, buat router2 dan router3 mengenali router 4 dari router mereka sendiri!
+Konfigurasi router R2
+enable
+configure terminal
+  hostname R2
+  interface FastEthernet x/0
+    ip address 10.1.24.2 255.255.255.0
+    no shutdown
+    exit
+
+  router ospf 1
+    network 10.1.24.0  0.0.0.255  area 0
+    passive-interface FastEthernet 0/0
+    exit
+
+
+Konfigurasi router R3
+enable
+configure terminal
+  hostname R3
+  interface FastEthernet x/0
+    ip address 10.1.34.3 255.255.255.0
+    no shutdown
+    exit
+  router ospf 1
+    network 10.1.34.0  0.0.0.255  area 0
+    passive-interface FastEthernet 0/0
+    exit
+

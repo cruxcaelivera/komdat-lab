@@ -1,0 +1,50 @@
+Operasi Dasar
+Koneksi Point-to-Point
+•	Dua PC dengan IP Configuration statis dihubungkan dengan kabel LAN Copper cross-over
+
+Switch dan Hub
+•	Tiga PC dengan IP statis dihubungkan dengan switch
+  o	Cek tabel ARP pada tiap PC dan tabel MAC pada switch dengan tombol "Inspect"
+•	Kemudian coba juga dengan memakai hub
+  o	hub: cara kerjanya broadcast
+
+Komunikasi Data dan Jaringan Komputer Praktikum Minggu ke-8
+1. Login cisco skillsforall
+2. Buka cisco packet tracer 8.2
+3. Hubungkan cisco packet tracker dengan akun cisco skillsforall
+4. Untuk menambah komputer pencet ikon menu end devices lalu pilih PC
+5. Untuk mematikan komputer, pencet ikon PC lalu pencet tombol merah
+6. Untuk menghubungkan komputer 1 dan komputer 2 pencet ikon menu connections lalu pencet petir
+
+•	Jaringan 192.168.0.0/24:
+  o	Alamat jaringan: 192.168.0.0
+  o	Alamat untuk host: 192.168.0.[1-254] --> maksimal 254 host dalam jaringan ini	
+  o	Setting IP statis untuk tiap PC melalui command prompt, misal: ipconfig 192.168.0.1 255.255.255.0
+  o	Alamat broadcast: 192.168.0.255
+  o	Prefiks jaringan: 24 --> Subnet mask: 255.255.255.0
+•	Alamat jaringan: digunakan untuk routing
+•	Alamat broadcast: digunakan untuk mengetahui siapa saja host lain yang berada dalam satu jaringan
+
+7. Untuk mengatur IP Computer, pencet ikon komputer, pilih menu desktop, pencet IP Config, lalu ketik 192.168.0.x (x untuk komputer pertama dimulai dari 1, 0 untuk jaringan) subnet mask akan diatur secara otomatis
+Broadcast
+
+•	Coba ping broadcast untuk jaringan 192.168.0.0/24
+  o	ping 192.168.0.255
+  o	ping 255.255.255.255 (jika alamat jaringan tidak diketahui)
+
+8. Ping komputer 1 ke komputer 2 dengan memencet ikon komputer 1 lalu buka menu desktop, pilih command prompt, lalu ketik ping 192.168.0.2 (Komputer 2)
+
+Switch dan Hub
+9. Untuk menghubungkan 3 komputer sekaligus, gunakan PT-Switch, tambah komputer ketiga terlebih dahulu, lalu pencet menu network devices, pilih submenu switches, lalu pilih PT-switch
+10. Lakukan hal yang sama, hubungkan ketiga komputer tersebut ke PT-Switch, untuk menghapus komputer yang sudah terhubung, gunakan Delete (Del)
+11. Tunggu hingga seluruh komputer terhubung
+12. Lakukan hal yang sama mengubah ip komputer ke empat dengan digit terakhir 3
+13. Lakukan hal yang sama melakukan ping komputer 1 dan 2 dari komputer 3, menggunakan ping 192.168.0.255 (Ping ke alamat dalam 1 jaringan)
+14. Realtime adalah waktu dari awal cisco packet tracer berjalan, lalu simulation untuk ujicoba. 
+15. Uji coba, pencet simulation di ujung kanan bawah, add simple PDU ke komputer sumber dan tujuan, perhatikan komputer
+15. Untuk menjalankan uci coba, pencet tombol play pada play control
+15. Untuk mempercepat cukup geser play control ke kanan
+•	Jalankan pada mode simulasi, amati jalannya paket ICMP
+15. Jika hanya ingin melihat ICMP, pencet edit filter pilih ICMP, lalu pencet show all/none
+16. Kembali ke realtime
+17. Jika ingin delete, pencet delete di bawah scenario, di sampingnya bisa dilihat last status successful

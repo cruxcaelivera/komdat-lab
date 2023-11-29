@@ -776,3 +776,196 @@ configure terminal
     passive-interface FastEthernet 0/0
     exit
 
+Azzam
+==========Router5 [NET-E] ==================================
+enable
+configure terminal
+  hostname R5
+
+  interface FastEthernet 0/0
+    ip address 172.8.5.1 255.255.255.0
+    no shutdown
+    exit
+interface FastEthernet 1/0
+    ip address 172.8.6.1 255.255.255.0
+    no shutdown
+    exit
+
+  ip dhcp pool NET5
+    network 172.8.5.0 255.255.255.0
+    default-router 172.8.5.1
+    exit
+  ip dhcp excluded-address 172.8.5.1 172.8.5.100
+
+ip dhcp pool NET6
+    network 172.8.6.0 255.255.255.0
+    default-router 172.8.6.1
+    exit
+  ip dhcp excluded-address 172.8.6.1 172.8.6.100
+
+  interface FastEthernet 4/0
+    ip address 172.8.25.5 255.255.255.0
+    no shutdown
+    exit
+
+
+  router rip
+    version 2
+    network 172.8.0.0
+    no auto-summary
+
+    passive-interface FastEthernet 0/0
+    exit
+
+  exit
+copy running-config startup-config
+
+
+==========Router4 [NET-D] ==================================
+enable
+configure terminal
+  hostname R4
+
+  interface FastEthernet 0/0
+    ip address 172.8.4.1 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET4
+    network 172.8.4.0 255.255.255.0
+    default-router 172.8.4.1
+    exit
+  ip dhcp excluded-address 172.8.4.1 172.8.4.100
+
+  interface FastEthernet 4/0
+    ip address 172.8.34.4 255.255.255.0
+    no shutdown
+    exit
+interface FastEthernet 5/0
+    ip address 172.8.24.4 255.255.255.0
+    no shutdown
+    exit
+
+
+  router rip
+    version 2
+    network 172.8.0.0
+    no auto-summary
+
+    passive-interface FastEthernet 0/0
+    exit
+
+  exit
+copy running-config startup-config
+
+==========Router3 [NET-C] ==================================
+enable
+configure terminal
+  hostname R3
+
+  interface FastEthernet 0/0
+    ip address 172.8.3.1 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET3
+    network 172.8.3.0 255.255.255.0
+    default-router 172.8.3.1
+    exit
+  ip dhcp excluded-address 172.8.3.1 172.8.3.100
+
+ interface FastEthernet 4/0
+    ip address 172.8.23.3 255.255.255.0
+    no shutdown
+    exit
+interface FastEthernet 5/0
+    ip address 172.8.34.3 255.255.255.0
+    no shutdown
+    exit
+
+
+  router rip
+    version 2
+    network 172.8.0.0
+    no auto-summary
+
+    passive-interface FastEthernet 0/0
+    exit
+
+  exit
+copy running-config startup-config
+
+
+==========Router2 [NET-B] ==================================
+enable
+configure terminal
+  hostname R2
+
+  interface FastEthernet 0/0
+    ip address 172.8.2.1 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET2
+    network 172.8.2.0 255.255.255.0
+    default-router 172.8.2.1
+    exit
+  ip dhcp excluded-address 172.8.2.1 172.8.2.100
+
+  interface FastEthernet 4/0
+    ip address 172.8.12.2 255.255.255.0
+    no shutdown
+    exit
+interface FastEthernet 5/0
+    ip address 172.8.23.2 255.255.255.0
+    no shutdown
+    exit
+interface FastEthernet 6/0
+    ip address 172.8.24.2 255.255.255.0
+    no shutdown
+    exit
+interface FastEthernet 7/0
+    ip address 172.8.25.2 255.255.255.0
+    no shutdown
+    exit
+
+
+  router rip
+    version 2
+    network 172.8.0.0
+    no auto-summary
+
+    passive-interface FastEthernet 0/0
+    exit
+
+  exit
+copy running-config startup-config
+
+
+==========Router1 [NET-A] ==================================
+enable
+configure terminal
+  hostname R1
+
+  interface FastEthernet 0/0
+    ip address 172.8.1.1 255.255.255.0
+    no shutdown
+    exit
+  ip dhcp pool NET1
+    network 172.8.1.0 255.255.255.0
+    default-router 172.8.1.1
+    exit
+  ip dhcp excluded-address 172.8.1.1 172.8.1.100
+
+  interface FastEthernet 4/0
+    ip address 172.8.12.1 255.255.255.0
+    no shutdown
+    exit
+
+  router rip
+    version 2
+    network 172.8.0.0
+    no auto-summary
+
+    passive-interface FastEthernet 0/0
+    exit
+
+  exit
+copy running-config startup-config

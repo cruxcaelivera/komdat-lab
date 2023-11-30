@@ -811,6 +811,95 @@ configure terminal
     network 10.1.34.0  0.0.0.255  area 0
     passive-interface FastEthernet 0/0
     exit
+
+Diberikan blok alamat IP 172.110.0.0/16 
+
+*Jaringan A, B, C terhubung ke router yang terpisah (1, 2, 3) dan ketikanya terhubung ke router 5
+Jika jaringan A kapasitasnya 50 hosts
+Jaringan B kapasitasnya 30 hosts
+Jaringan C kapasitasnya 80 hosts
+
+*Jaringan D dan E terhubung ke router yang sama (4) dam router 4 terhubung ke router 5
+Jaringan D kapasitasnya 100 hosts
+Jaringan E kapasitasnya 40 hosts
+
+Bagaimana cara membagi blok alamat sesuai dengan kebutuhan setiap jaringan?
+Jaringan A (50 hosts):
+
+2^6 = 64, sehingga kita perlu setidaknya 6 bit untuk host.
+Jadi, sisa bit untuk subnetting adalah 16 - 6 = 10 bit.
+Kita dapat membuat subnet dengan panjang 10 bit, yang memberikan 2^10 = 1024 subnet.
+Jaringan B (30 hosts):
+
+2^5 = 32, sehingga kita perlu setidaknya 5 bit untuk host.
+Sisa bit untuk subnetting adalah 16 - 5 = 11 bit.
+Kita dapat membuat subnet dengan panjang 11 bit, yang memberikan 2^11 = 2048 subnet.
+Jaringan C (80 hosts):
+
+2^7 = 128, sehingga kita perlu setidaknya 7 bit untuk host.
+Sisa bit untuk subnetting adalah 16 - 7 = 9 bit.
+Kita dapat membuat subnet dengan panjang 9 bit, yang memberikan 2^9 = 512 subnet.
+Jaringan D (100 hosts):
+
+2^7 = 128, sehingga kita perlu setidaknya 7 bit untuk host.
+Sisa bit untuk subnetting adalah 16 - 7 = 9 bit.
+Kita dapat membuat subnet dengan panjang 9 bit, yang memberikan 2^9 = 512 subnet.
+Jaringan E (40 hosts):
+
+2^6 = 64, sehingga kita perlu setidaknya 6 bit untuk host.
+Sisa bit untuk subnetting adalah 16 - 6 = 10 bit.
+Kita dapat membuat subnet dengan panjang 10 bit, yang memberikan 2^10 = 1024 subnet.
+
+
+Jaringan A (50 hosts):
+Jumlah bit host: 6 bit
+Sisa bit subnetting: 10 bit
+Subnet mask: /22 (16 - 6)
+Jumlah subnet: 2^10 = 1024
+Jarak antar subnet: 256 (2^8)
+Alamat IP jaringan A: 172.110.0.0/22
+Alamat IP pertama untuk host: 172.110.0.1
+Alamat IP terakhir untuk host: 172.110.3.254
+Jaringan B (30 hosts):
+
+Jumlah bit host: 5 bit
+Sisa bit subnetting: 11 bit
+Subnet mask: /21 (16 - 5)
+Jumlah subnet: 2^11 = 2048
+Jarak antar subnet: 128 (2^7)
+Alamat IP jaringan B: 172.110.4.0/21
+Alamat IP pertama untuk host: 172.110.4.1
+Alamat IP terakhir untuk host: 172.110.7.254
+Jaringan C (80 hosts):
+
+Jumlah bit host: 7 bit
+Sisa bit subnetting: 9 bit
+Subnet mask: /23 (16 - 7)
+Jumlah subnet: 2^9 = 512
+Jarak antar subnet: 512 (2^9)
+Alamat IP jaringan C: 172.110.8.0/23
+Alamat IP pertama untuk host: 172.110.8.1
+Alamat IP terakhir untuk host: 172.110.9.254
+Jaringan D (100 hosts):
+
+Jumlah bit host: 7 bit
+Sisa bit subnetting: 9 bit
+Subnet mask: /23 (16 - 7)
+Jumlah subnet: 2^9 = 512
+Jarak antar subnet: 512 (2^9)
+Alamat IP jaringan D: 172.110.10.0/23
+Alamat IP pertama untuk host: 172.110.10.1
+Alamat IP terakhir untuk host: 172.110.11.254
+Jaringan E (40 hosts):
+
+Jumlah bit host: 6 bit
+Sisa bit subnetting: 10 bit
+Subnet mask: /22 (16 - 6)
+Jumlah subnet: 2^10 = 1024
+Jarak antar subnet: 256 (2^8)
+Alamat IP jaringan E: 172.110.12.0/22
+Alamat IP pertama untuk host: 172.110.12.1
+Alamat IP terakhir untuk host: 172.110.15.254
  
 Azzam
 Router 2 adalah perantara dari semua router 
@@ -1069,3 +1158,6 @@ Router5 (R5, Jaringan D dan E)
     exit
   exit
 copy running-config startup-config
+
+
+

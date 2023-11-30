@@ -12,6 +12,10 @@ o	Cek tabel ARP pada tiap PC dan tabel MAC pada switch dengan tombol "Inspect"
 o	hub: cara kerjanya broadcast
 
 Komunikasi Data dan Jaringan Komputer Praktikum Minggu ke-8
+- Koneksi antara PC dan Switch (IP Config Static)
+- Ping satu pc ke pc yang lain
+- Ping satu pc ke semua pc dalam satu jaringan
+- Menghubungkan komputer yang banyak dengan switch
 1. Login cisco skillsforall
 2. Buka cisco packet tracer 8.2
 3. Hubungkan cisco packet tracker dengan akun cisco skillsforall
@@ -49,6 +53,14 @@ Switch dan Hub
 
  
 Komunikasi dan Jaringan Komputer Minggu ke-9
+- Menghubungkan switch dengan server
+- Konfigurasi server
+- Memberikan IP secara dinamis (DHCP)
+- Menghubungkan switch dengan switch
+- Menghubungkan PT Server dan Access Point
+- Menambah port pada server
+- Konfigurasi access point (SSID, WPA2 PSK)
+- Mengganti kotak network interface ethernet dengan modul PT-LAPTOP-NM-1W pada laptop (Lakukan yang sama pada smartphone)
 Aplikasi Server dan Wireless
 •	Menghubungkan 3 PC dengan menggunakan switch
 o	alamat jaringan LAN yang akan dipakai: 10.1.1.0/24
@@ -89,6 +101,12 @@ Buka config, wireless0, atur SSID, wpa2 dan psk pass yang sama dengan pada Acces
 16. Lakukan yang sama pada smartphone
  
 Komunikasi dan Jaringan Komputer Minggu ke-10
+- Menghubungkan jaringan (switch-pc) ke router
+- Menghubungkan laptop dengan router 
+- Konfigurasi router
+- Menambah jaringan (switch-pc) pada router
+- interface FastEthernet pada saat konfigurasi
+
 Alangkah baiknya tidak menggunakan template agar tidak terjadi sesuatu yang tidak diinginkan!
 1. Buat seperti pada foto. Menghubungkan dua jaringan 10.1.1.0 dan 10.1.2.0 dengan sebuah router.
 2. Setiap jaringan terdapat beberapa PC yang terhubung ke switch.
@@ -178,6 +196,13 @@ Jangan lupa set DHCP semua PC sebelum uji coba simple PDU!
 Sebelum uji coba simple PDU, uji coba simple PDU antar komputer dalam satu jaringan sebelum ke berbeda jaringan!
  
 Komunikasi dan Jaringan Komputer Minggu ke-11
+- Menghubungkan router dengan kabel Fiber Optic
+- Membuat jaringan dalam kabel Fiber Optic 
+- Dari jaringan tersebut, konfigurasi routing statis/routing statik membuat router mengenali satu sama lain.  
+- Menambah router yang terhubung langsung ke router
+- Tidak menimpa IP Address dalam membuat jaringan antar router
+- Mengenalkan router melalui perantara router secara manual
+
 1. Buat seperti pada foto. Menghubungkan dua jaringan 10.1.1.0 dan 10.1.2.0 pada router pertama dan jaringan 10.1.3.0 pada router kedua.
 2. Setiap jaringan terdapat beberapa PC yang terhubung ke switch.
 3. Siapkan satu laptop, hubungkan ke router dengan membuka menu connections > pilih kabel console (Warna biru). Pilih RS232 pada sumber dan console pada tujuan.
@@ -401,6 +426,11 @@ copy running-config startup-config
 
  
 Komunikasi dan Jaringan Komputer Minggu ke-12
+- Routing Dinamis: RIPv2
+- Menghubungkan router yang banyak dengan menambah port menggunakan PT-ROUTER-FFE
+- FastEthernet tidak bertabrakan antar jaringan
+- Router RIP, version, no auto-summary, passive-interface
+- Mengenalkan router melalui perantara router (Cukup mengenalkan antara router yang terhubung langsung saja)
 Routing Dinamis: RIPv2
 Routing Statis vs Dinamis
 Routing Statis: Konfigurasi manual tiap router
@@ -589,11 +619,17 @@ configure terminal
 
  
 Komunikasi dan Jaringan Komputer Minggu ke-13
+- Routing Dinamis: OSPF
+- Menghubungkan router yang banyak dengan menambah port menggunakan PT-ROUTER-FFE
+- FastEthernet tidak bertabrakan antar jaringan
+- Router ospf, network area, passive interface
+- Mengenalkan router melalui perantara router (Cukup mengenalkan antara router yang terhubung langsung saja)
+
 Routing Dinamis: OSPF
 Dua cara bagaimana algoritme routing dinamis bekerja, yaitu distance-vector (contoh: RIP, EIGRP) dan link-state (contoh: OSPF, IS-IS).
 Contoh foto hanya satu area, area 0
 1. Buat seperti pada foto. Siapkan tiga router yang masing-masing terhubung ke suatu jaringan. Ubah nama router0 menjadi router1 untuk router pertama dan seterusnya (Agar tidak membingungkan).
-2. Setiap jaringan terdapat beberapa PC yang terhubung ke switch.
+2. Setia4p jaringan terdapat beberapa PC yang terhubung ke switch.
 3. Hubungkan setiap router dengan menu Connections > Kabel Fiber. Matikan router ketiga, lalu Tambahkan PT-ROUTER-FFE, nyalakan kembali. Hubungkan ke router kesatu dan kedua. Pastikan FastEthernet yang digunakan antara sumber dan tujuan sama, dan antar FastEthernet yang digunakan jaringan berbeda/tidak bertabrakan satu-sama lain.
 4. Buka router, ikuti perintah di github, jangan lupa hapus enable secret sebelum dicopy paste!
 Konfigurasi router R1
@@ -775,8 +811,8 @@ configure terminal
     network 10.1.34.0  0.0.0.255  area 0
     passive-interface FastEthernet 0/0
     exit
-
-Azzam
+ 
+UASP Tahun Lalu (Versi Azzam)
 ==========Router5 [NET-E] ==================================
 enable
 configure terminal

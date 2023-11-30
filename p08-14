@@ -999,7 +999,7 @@ configure terminal
     exit
   ip dhcp excluded-address 172.8.1.1 172.8.1.100
 
-#Menghubungkan 
+#Menghubungkan ke router kedua (Router perantara)
   interface FastEthernet 4/0
     ip address 172.8.12.1 255.255.255.0
     no shutdown
@@ -1015,7 +1015,7 @@ configure terminal
 
   exit
 copy running-config startup-config
-
+ 
 Azzam, but OSPF
 Tinggal sesuain aja jam dari punya lu
 

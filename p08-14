@@ -812,8 +812,9 @@ configure terminal
     passive-interface FastEthernet 0/0
     exit
  
-UASP Tahun Lalu (Versi Azzam)
-==========Router5 [NET-E] ==================================
+Azzam
+Router 2 adalah perantara dari semua router 
+Router 5 (Router bawah jaringan D dan E)
 enable
 configure terminal
   hostname R5
@@ -822,23 +823,22 @@ configure terminal
     ip address 172.8.5.1 255.255.255.0
     no shutdown
     exit
-interface FastEthernet 1/0
+  interface FastEthernet 1/0
     ip address 172.8.6.1 255.255.255.0
     no shutdown
     exit
-
   ip dhcp pool NET5
     network 172.8.5.0 255.255.255.0
     default-router 172.8.5.1
     exit
   ip dhcp excluded-address 172.8.5.1 172.8.5.100
-
-ip dhcp pool NET6
+  ip dhcp pool NET6
     network 172.8.6.0 255.255.255.0
     default-router 172.8.6.1
     exit
   ip dhcp excluded-address 172.8.6.1 172.8.6.100
 
+#Menghubungkan ke router 2 (Router perantara)
   interface FastEthernet 4/0
     ip address 172.8.25.5 255.255.255.0
     no shutdown
@@ -856,8 +856,7 @@ ip dhcp pool NET6
   exit
 copy running-config startup-config
 
-
-==========Router4 [NET-D] ==================================
+Router 4 (Router kanan jaringan C)
 enable
 configure terminal
   hostname R4
@@ -866,17 +865,20 @@ configure terminal
     ip address 172.8.4.1 255.255.255.0
     no shutdown
     exit
-  ip dhcp pool NET4
+  ip dhcp pool NET2
     network 172.8.4.0 255.255.255.0
     default-router 172.8.4.1
     exit
   ip dhcp excluded-address 172.8.4.1 172.8.4.100
 
+#Menghubungkan ke router 3
   interface FastEthernet 4/0
     ip address 172.8.34.4 255.255.255.0
     no shutdown
     exit
-interface FastEthernet 5/0
+
+#Menghubungkan ke router 2 (Router perantara)
+  interface FastEthernet 5/0
     ip address 172.8.24.4 255.255.255.0
     no shutdown
     exit
@@ -893,7 +895,7 @@ interface FastEthernet 5/0
   exit
 copy running-config startup-config
 
-==========Router3 [NET-C] ==================================
+Router 3 (Router atas jaringan B)
 enable
 configure terminal
   hostname R3
@@ -902,17 +904,20 @@ configure terminal
     ip address 172.8.3.1 255.255.255.0
     no shutdown
     exit
-  ip dhcp pool NET3
+  ip dhcp pool NET2
     network 172.8.3.0 255.255.255.0
     default-router 172.8.3.1
     exit
   ip dhcp excluded-address 172.8.3.1 172.8.3.100
 
- interface FastEthernet 4/0
+#Menghubungkan ke router 2 (Router perantara)
+  interface FastEthernet 4/0
     ip address 172.8.23.3 255.255.255.0
     no shutdown
     exit
-interface FastEthernet 5/0
+
+#Menghubungkan ke router 4 (Jaringan C)
+  interface FastEthernet 5/0
     ip address 172.8.34.3 255.255.255.0
     no shutdown
     exit
@@ -929,8 +934,7 @@ interface FastEthernet 5/0
   exit
 copy running-config startup-config
 
-
-==========Router2 [NET-B] ==================================
+Router 2 (Router perantara)
 enable
 configure terminal
   hostname R2
@@ -939,29 +943,35 @@ configure terminal
     ip address 172.8.2.1 255.255.255.0
     no shutdown
     exit
-  ip dhcp pool NET2
+  ip dhcp pool NET1
     network 172.8.2.0 255.255.255.0
     default-router 172.8.2.1
     exit
   ip dhcp excluded-address 172.8.2.1 172.8.2.100
 
+#Menghubungkan ke router pertama (Jaringan A)
   interface FastEthernet 4/0
     ip address 172.8.12.2 255.255.255.0
     no shutdown
     exit
-interface FastEthernet 5/0
+
+#Menghubungkan ke router ketiga (Jaringan B)
+  interface FastEthernet 5/0
     ip address 172.8.23.2 255.255.255.0
     no shutdown
-    exit
-interface FastEthernet 6/0
+    exit	
+
+#Menghubungkan ke router keempat (Jaringan C)
+  interface FastEthernet 6/0
     ip address 172.8.24.2 255.255.255.0
     no shutdown
     exit
-interface FastEthernet 7/0
+
+#Menghubungkan ke router kelima (Jaringan D dan E)
+  interface FastEthernet 7/0
     ip address 172.8.25.2 255.255.255.0
     no shutdown
     exit
-
 
   router rip
     version 2
@@ -974,8 +984,7 @@ interface FastEthernet 7/0
   exit
 copy running-config startup-config
 
-
-==========Router1 [NET-A] ==================================
+Router 1 (Router kiri jaringan A)
 enable
 configure terminal
   hostname R1
@@ -990,6 +999,7 @@ configure terminal
     exit
   ip dhcp excluded-address 172.8.1.1 172.8.1.100
 
+#Menghubungkan 
   interface FastEthernet 4/0
     ip address 172.8.12.1 255.255.255.0
     no shutdown
